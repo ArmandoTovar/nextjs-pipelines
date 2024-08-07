@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nextjs-pipelines
+  labels:
+    app: nextjs-pipelines
+    app.openshift.io/runtime: nodejs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextjs-pipelines
+  template:
+    metadata:
+      labels:
+        app: nextjs-pipelines
+    spec:
+      containers:
+        - name: nextjs-pipelines
+          image: quay.io/nodeshift-blog-examples/nextjs-pipelines:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: Always
+          env: []
